@@ -80,11 +80,3 @@ resume-screening-agent/
 **Rajesh Rajoli**
 
 ---
----
-
-### 📝 Reviewer / Submission Notes
-
-*(You can keep this section separate from your actual `README.md` or use it as a final checklist before submitting your project).*
-
-#### 11. Demo Resumes
-Include **3–4 sample resumes** that you are allowed to share (or create anonymized sample resumes) in a `data/` or `samples/` folder so reviewers can immediately test the project without having to hunt for their own files.
