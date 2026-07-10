@@ -1,82 +1,229 @@
 # 📄 AI Resume Screening Agent
 
-## 📖 Overview
+An AI-powered Applicant Tracking System (ATS) that automatically evaluates resumes against a job description using Semantic Similarity and Large Language Models (LLMs). The application helps recruiters quickly identify the most suitable candidates by analyzing resumes, calculating ATS scores, and generating AI-powered recommendations.
 
-An AI-powered Applicant Tracking System (ATS) that evaluates resumes against a job description using semantic similarity and a Large Language Model.
+---
 
-## ✨ Features
+# 🚀 Features
 
-- **Upload Job Description:** Easily input text-based job descriptions.
-- **Upload Multiple Resumes:** Process multiple PDF resumes simultaneously.
-- **Resume Parsing & Extraction:** Automatically extract key candidate information (Name, Email, Phone).
-- **Semantic Similarity:** Calculate how closely the resume matches the job description.
-- **AI Resume Analysis:** Leverage LLMs to identify strengths, missing skills, and generate summaries.
-- **ATS Score & Ranking:** Generate a final ATS score and rank candidates from best to worst.
-- **CSV Export:** Download a detailed summary report of all processed candidates.
-- **Streamlit Dashboard:** A clean, interactive user interface.
+- 📄 Upload a Job Description (.txt)
+- 📂 Upload Multiple Resume PDFs
+- 👤 Automatically Extract Candidate Information (Name, Email, Phone Number)
+- 🧠 Semantic Similarity Matching using Sentence Transformers
+- 🤖 AI Resume Analysis using Groq LLM
+- ⭐ Generate ATS Match Score
+- 📊 Candidate Ranking Dashboard
+- ✅ AI Recommendation (Shortlist / Further Review / Reject)
+- 💪 Identify Candidate Strengths
+- ❌ Detect Missing Skills
+- 📥 Download Results as CSV
+- 🌐 Interactive Streamlit Web Dashboard
 
-## 🛠️ Tech Stack
+---
 
-- **Python**
-- **Streamlit** (Frontend framework)
-- **Groq** (LLM integration)
-- **Sentence Transformers** (Semantic similarity)
-- **Pandas** (Data manipulation)
-- **PDFPlumber** (PDF parsing)
+# 🛠️ Tech Stack
 
-## 🚀 Getting Started
+- Python
+- Streamlit
+- Groq API
+- Sentence Transformers
+- Scikit-learn
+- Pandas
+- PDFPlumber
+- Python Dotenv
 
-### 1. Installation
+---
 
-Clone the repository and install the required dependencies:
+# 📦 Installation
+
+Clone the repository:
 
 ```bash
-git clone https://github.com/rajesh580/AI-Resume-Screening-Agent
-cd resume-screening-agent
+git clone https://github.com/rajesh580/AI-Resume-Screening-Agent.git
+cd AI-Resume-Screening-Agent
+```
+
+Create and activate a virtual environment:
+
+### Windows
+
+```bash
+python -m venv venv
+venv\Scripts\activate
+```
+
+### Linux / macOS
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
+
+Install all dependencies:
+
+```bash
 pip install -r requirements.txt
 ```
 
-### 2. Environment Setup
+---
 
-Create a `.env` file in the root directory and add your API keys:
+# 🔑 Environment Variables
+
+Create a `.env` file in the project root.
 
 ```env
-GROQ_API_KEY=your_groq_api_key_here
+GROQ_API_KEY=your_groq_api_key
 ```
 
-### 3. Run the Application
+---
 
-Launch the Streamlit dashboard:
+# ▶️ Run the Application
 
 ```bash
 streamlit run src/streamlit_app.py
 ```
 
-## 📂 Project Structure
+The application will open automatically in your browser.
+
+---
+
+# 📂 Project Structure
 
 ```text
 resume-screening-agent/
+│
 ├── src/
-│   ├── streamlit_app.py       # Main application file
-│   ├── parser.py              # PDF extraction logic
-│   ├── similarity.py          # Semantic similarity calculations
-│   ├── llm.py                 # Groq LLM integration
-│   └── resume_parser.py       # Candidate detail extraction
-├── .env                       # Environment variables (do not commit)
-├── requirements.txt           # Python dependencies
-└── README.md                  # Project documentation
+│   ├── streamlit_app.py
+│   ├── app.py
+│   ├── parser.py
+│   ├── resume_parser.py
+│   ├── similarity.py
+│   ├── llm.py
+│   └── utils.py
+│
+├── data/
+│   └── job_description.txt
+│
+├── resumes/
+│   └── sample_resumes.pdf
+│
+├── output/
+│   └── resume_screening_results.csv
+│
+├── requirements.txt
+├── README.md
+├── .env.example
+└── screenshots/
 ```
 
-## 🔮 Future Improvements
+---
 
-- **OCR Support:** To read text from image-based or scanned PDFs.
-- **DOCX Support:** Allow users to upload Word documents.
-- **Authentication:** Secure the dashboard with user login.
-- **Recruiter Dashboard:** Advanced analytics and historical data tracking.
-- **Email Notifications:** Automatically email shortlisted candidates.
+# 📥 Sample Input
 
-## 👨‍💻 Author
+### Job Description
+
+```
+Python Backend Developer
+
+Required Skills
+
+Python
+FastAPI
+REST APIs
+SQL
+Git
+Docker
+
+Preferred Skills
+
+AWS
+Kubernetes
+```
+
+### Resume
+
+Upload one or more PDF resumes through the Streamlit dashboard.
+
+---
+
+# 📤 Sample Output
+
+The application provides:
+
+- Candidate Information
+- Semantic Similarity Score
+- AI Match Score
+- Final ATS Score
+- Candidate Strengths
+- Missing Skills
+- AI Recommendation
+- Candidate Ranking
+- Downloadable CSV Report
+
+---
+
+# ⚖️ Tradeoffs
+
+### Design Decisions
+
+- Sentence Transformers were used for semantic similarity because they provide fast and accurate text embeddings.
+- Groq Llama was selected for AI resume evaluation due to its speed and high-quality responses.
+- Candidate information is extracted using regular expressions to keep the application lightweight.
+
+### Limitations
+
+- Supports PDF resumes only.
+- Does not support scanned/image-based resumes (OCR).
+- No recruiter authentication.
+- No database integration.
+
+### Future Improvements
+
+- OCR Support for scanned resumes
+- DOCX Resume Support
+- Recruiter Login & Dashboard
+- Email Notifications
+- Resume History
+- Database Storage
+- Cloud Deployment
+
+---
+
+# 📸 Screenshots
+
+Add screenshots here after running the application.
+
+Example:
+
+- Home Page
+- Resume Upload
+- Resume Analysis
+- Candidate Ranking
+- CSV Export
+
+---
+
+# 📋 Deliverables
+
+This project includes:
+
+- ✅ Resume Parsing
+- ✅ Candidate Information Extraction
+- ✅ Semantic Similarity Matching
+- ✅ AI Resume Analysis
+- ✅ ATS Score Generation
+- ✅ Candidate Ranking
+- ✅ CSV Export
+- ✅ Interactive Streamlit Dashboard
+
+---
+
+# 👨‍💻 Author
 
 **Rajesh Rajoli**
 
+GitHub: https://github.com/rajesh580
+
 ---
+
+## ⭐ If you found this project useful, consider giving it a star!
