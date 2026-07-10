@@ -1,23 +1,34 @@
 # 📄 AI Resume Screening Agent
 
-An AI-powered Applicant Tracking System (ATS) that automatically evaluates resumes against a job description using Semantic Similarity and Large Language Models (LLMs). The application helps recruiters quickly identify the most suitable candidates by analyzing resumes, calculating ATS scores, and generating AI-powered recommendations.
+An AI-powered Applicant Tracking System (ATS) that automatically evaluates resumes against a job description using **Semantic Similarity** and **Large Language Models (LLMs)**. The application helps recruiters quickly identify the most suitable candidates by analyzing resumes, calculating ATS scores, generating AI-powered recommendations, and ranking candidates based on their relevance to the job description.
 
 ---
 
 # 🚀 Features
 
 - 📄 Upload a Job Description (.txt)
-- 📂 Upload Multiple Resume PDFs
+- 📂 Upload and Screen Multiple PDF Resumes
 - 👤 Automatically Extract Candidate Information (Name, Email, Phone Number)
 - 🧠 Semantic Similarity Matching using Sentence Transformers
 - 🤖 AI Resume Analysis using Groq LLM
 - ⭐ Generate ATS Match Score
-- 📊 Candidate Ranking Dashboard
+- 📊 Generate Final ATS Score
+- 🏆 Candidate Ranking Dashboard
 - ✅ AI Recommendation (Shortlist / Further Review / Reject)
 - 💪 Identify Candidate Strengths
 - ❌ Detect Missing Skills
-- 📥 Download Results as CSV
-- 🌐 Interactive Streamlit Web Dashboard
+- 📥 Download Ranked Results as CSV
+- 🌐 Interactive Streamlit Dashboard
+
+---
+
+# 📄 Supported Resume Format
+
+| Format | Status |
+|---------|--------|
+| PDF | ✅ Supported |
+| DOCX | 🚧 Planned |
+| TXT | 🚧 Planned |
 
 ---
 
@@ -43,7 +54,7 @@ git clone https://github.com/rajesh580/AI-Resume-Screening-Agent.git
 cd AI-Resume-Screening-Agent
 ```
 
-Create and activate a virtual environment:
+Create a virtual environment.
 
 ### Windows
 
@@ -59,7 +70,7 @@ python3 -m venv venv
 source venv/bin/activate
 ```
 
-Install all dependencies:
+Install the required dependencies.
 
 ```bash
 pip install -r requirements.txt
@@ -83,7 +94,39 @@ GROQ_API_KEY=your_groq_api_key
 streamlit run src/streamlit_app.py
 ```
 
-The application will open automatically in your browser.
+The Streamlit dashboard will automatically open in your browser.
+
+---
+
+# 🏗️ Architecture
+
+```text
+                Job Description
+                       │
+                       ▼
+               Upload Resume PDFs
+                       │
+                       ▼
+               Resume Text Parsing
+                       │
+                       ▼
+        Candidate Information Extraction
+                       │
+                       ▼
+         Semantic Similarity Calculation
+                       │
+                       ▼
+              Groq LLM Resume Analysis
+                       │
+                       ▼
+              Final ATS Score Calculation
+                       │
+                       ▼
+             Candidate Ranking Dashboard
+                       │
+                       ▼
+               Export Results to CSV
+```
 
 ---
 
@@ -96,24 +139,29 @@ resume-screening-agent/
 │   ├── streamlit_app.py
 │   ├── app.py
 │   ├── parser.py
-│   ├── resume_parser.py
 │   ├── similarity.py
 │   ├── llm.py
+│   ├── resume_parser.py
 │   └── utils.py
 │
 ├── data/
 │   └── job_description.txt
 │
 ├── resumes/
-│   └── sample_resumes.pdf
+│   ├── Rajesh_resume.pdf
+│   ├── Priya_resume.pdf
+│   ├── Praveen_resume.pdf
+│   └── Revanasidd_resume.pdf
 │
 ├── output/
 │   └── resume_screening_results.csv
 │
+├── screenshots/
+│
 ├── requirements.txt
 ├── README.md
 ├── .env.example
-└── screenshots/
+└── .gitignore
 ```
 
 ---
@@ -122,25 +170,25 @@ resume-screening-agent/
 
 ### Job Description
 
-```
+```text
 Python Backend Developer
 
 Required Skills
 
-Python
-FastAPI
-REST APIs
-SQL
-Git
-Docker
+- Python
+- FastAPI
+- REST APIs
+- SQL
+- Git
+- Docker
 
 Preferred Skills
 
-AWS
-Kubernetes
+- AWS
+- Kubernetes
 ```
 
-### Resume
+### Resume Input
 
 Upload one or more PDF resumes through the Streamlit dashboard.
 
@@ -148,97 +196,130 @@ Upload one or more PDF resumes through the Streamlit dashboard.
 
 # 📤 Sample Output
 
-The application provides:
+The application generates:
 
 - Candidate Information
 - Semantic Similarity Score
-- AI Match Score
+- LLM Match Score
 - Final ATS Score
+- AI Recommendation
 - Candidate Strengths
 - Missing Skills
-- AI Recommendation
 - Candidate Ranking
 - Downloadable CSV Report
 
 ---
 
-# ⚖️ Tradeoffs
+# ⚖️ Scoring Method
 
-### Design Decisions
+The Resume Screening Agent evaluates candidates using two scoring components.
 
-- Sentence Transformers were used for semantic similarity because they provide fast and accurate text embeddings.
-- Groq Llama was selected for AI resume evaluation due to its speed and high-quality responses.
-- Candidate information is extracted using regular expressions to keep the application lightweight.
+### 1. Semantic Similarity (60%)
 
-### Limitations
+Sentence Transformers generate embeddings for both the resume and the job description. Cosine similarity is then used to measure how closely the resume matches the job description.
 
-- Supports PDF resumes only.
-- Does not support scanned/image-based resumes (OCR).
-- No recruiter authentication.
-- No database integration.
+### 2. LLM Match Score (40%)
 
-### Future Improvements
+Groq Llama analyzes the resume and provides:
 
-- OCR Support for scanned resumes
-- DOCX Resume Support
-- Recruiter Login & Dashboard
-- Email Notifications
-- Resume History
-- Database Storage
-- Cloud Deployment
-
----
-## Scoring Method
-
-The Resume Screening Agent evaluates candidates using three components:
-
-1. **Semantic Similarity (60%)**
-   - Sentence Transformers are used to compare the resume with the job description.
-   - This measures how semantically similar the candidate's experience and skills are to the job requirements.
-
-2. **LLM Match Score (40%)**
-   - Groq Llama analyzes the resume against the job description.
-   - It generates:
-     - Match Score
-     - Recommendation
-     - Strengths
-     - Missing Skills
-     - Summary
+- Match Score
+- Recommendation
+- Candidate Strengths
+- Missing Skills
+- Summary
 
 ### Final ATS Score
 
+```
 Final ATS Score =
-
-0.6 × Semantic Similarity
-
+(0.6 × Semantic Similarity)
 +
+(0.4 × LLM Match Score)
+```
 
-0.4 × LLM Match Score
+Candidates are ranked in descending order based on the Final ATS Score.
 
-Candidates are ranked in descending order of the Final ATS Score.
 ---
+
+# 📁 Output Files
+
+The application generates:
+
+- 📊 Ranked Candidate Dashboard
+- 📄 AI Resume Analysis
+- 📥 resume_screening_results.csv
+
+---
+
+# ⚖️ Tradeoffs
+
+## Design Decisions
+
+- Sentence Transformers were selected for semantic similarity because they provide fast and accurate semantic matching.
+- Groq Llama is used for qualitative resume evaluation and reasoning.
+- Candidate information is extracted using lightweight regular-expression parsing to keep the application simple and efficient.
+
+## Limitations
+
+- Currently supports PDF resumes only.
+- DOCX and TXT support are planned for future releases.
+- OCR is not implemented for scanned/image-based resumes.
+- No recruiter authentication.
+- No database integration.
+
+## Future Improvements
+
+- DOCX Resume Support
+- TXT Resume Support
+- OCR Support for Scanned Resumes
+- Recruiter Authentication
+- Candidate Database
+- Email Notifications
+- Resume History
+- Cloud Deployment
+- Skill Gap Analysis
+
+---
+
 # 📸 Screenshots
+
+Add screenshots of the following pages after running the application.
 
 - Home Page
 - Resume Upload
 - Resume Analysis
-- Candidate Ranking
+- Candidate Ranking Dashboard
 - CSV Export
 
 ---
 
-# 📋 Deliverables
+# 📋 Agent Deliverables
 
-This project includes:
+This project satisfies the following deliverables:
 
-- ✅ Resume Parsing
-- ✅ Candidate Information Extraction
-- ✅ Semantic Similarity Matching
-- ✅ AI Resume Analysis
-- ✅ ATS Score Generation
-- ✅ Candidate Ranking
-- ✅ CSV Export
+- ✅ Parse PDF resumes
+- ✅ Extract Candidate Information
+- ✅ Compute Semantic Similarity
+- ✅ AI-powered Resume Evaluation
+- ✅ Generate ATS Scores
+- ✅ Rank Multiple Candidates
+- ✅ Provide AI Reasoning
+- ✅ Export Ranked Results as CSV
 - ✅ Interactive Streamlit Dashboard
+
+---
+
+# 🙏 Acknowledgements
+
+This project makes use of the following open-source technologies:
+
+- Groq API
+- Streamlit
+- Sentence Transformers
+- Hugging Face
+- PDFPlumber
+- Pandas
+- Scikit-learn
 
 ---
 
@@ -250,4 +331,10 @@ GitHub: https://github.com/rajesh580
 
 ---
 
-## ⭐ If you found this project useful, consider giving it a star!
+# 📄 License
+
+This project was developed for educational and hackathon purposes.
+
+---
+
+⭐ If you found this project useful, consider giving it a star on GitHub.
