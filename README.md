@@ -188,12 +188,36 @@ The application provides:
 - Cloud Deployment
 
 ---
+## Scoring Method
 
+The Resume Screening Agent evaluates candidates using three components:
+
+1. **Semantic Similarity (60%)**
+   - Sentence Transformers are used to compare the resume with the job description.
+   - This measures how semantically similar the candidate's experience and skills are to the job requirements.
+
+2. **LLM Match Score (40%)**
+   - Groq Llama analyzes the resume against the job description.
+   - It generates:
+     - Match Score
+     - Recommendation
+     - Strengths
+     - Missing Skills
+     - Summary
+
+### Final ATS Score
+
+Final ATS Score =
+
+0.6 × Semantic Similarity
+
++
+
+0.4 × LLM Match Score
+
+Candidates are ranked in descending order of the Final ATS Score.
+---
 # 📸 Screenshots
-
-Add screenshots here after running the application.
-
-Example:
 
 - Home Page
 - Resume Upload
