@@ -88,28 +88,3 @@ resume-screening-agent/
 
 #### 11. Demo Resumes
 Include **3–4 sample resumes** that you are allowed to share (or create anonymized sample resumes) in a `data/` or `samples/` folder so reviewers can immediately test the project without having to hunt for their own files.
-
-#### 12. Final Score Estimate
-
-Based on what you've built, here is the projected evaluation:
-
-| Category | Score |
-| :--- | :--- |
-| **Working AI Agent** | 30/30 |
-| **NLP Similarity & LLM** | 24/25 |
-| **Code Quality** | 19/20 |
-| **README** | 15/15 *(with this updated version!)* |
-| **Tradeoffs** | 9/10 |
-| **Estimated Total** | **97/100** |
-
-#### 💡 One Final Suggestion
-
-Before hitting submit, **test the project from a fresh virtual environment** to ensure no dependencies were missed:
-
-1. Create a new virtual environment (`python -m venv venv`).
-2. Activate it.
-3. Install from `requirements.txt`.
-4. Add a test `.env` file.
-5. Run the Streamlit app.
-
-If it works without any manual fixes, your repository is in excellent shape for reviewers!
