@@ -31,7 +31,7 @@ An AI-powered Applicant Tracking System (ATS) that evaluates resumes against a j
 Clone the repository and install the required dependencies:
 
 ```bash
-git clone <repo_url>
+git clone https://github.com/rajesh580/AI-Resume-Screening-Agent
 cd resume-screening-agent
 pip install -r requirements.txt
 ```
